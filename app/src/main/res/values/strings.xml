@@ -1,0 +1,25 @@
+<resources>
+    <!-- TODO: MainActivity strings -->
+
+    <string name="app_name">Acts</string>
+    <string name="tab_text_1">Declension of names</string>
+    <string name="tab_text_2">Age of car</string>
+    <string name="tab_text_3">Tab 3</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+
+    <!-- TODO: DeclensionNameFragment strings -->
+
+    <string name="declension_name_edittext">Enter full name</string>
+    <string name="declension_name_texview_name">You are entered name?</string>
+    <string name="declension_name_textview_sex">Select a gender:</string>
+    <string name="declension_name_checkbox_fullname">Full name</string>
+    <string name="declension_name_checkbox_male">Male</string>
+    <string name="declension_name_checkbox_female">Female</string>
+    <string name="declension_name_button_decline">Decline</string>
+
+    <!-- TODO: AgeCarFragment strings-->
+
+
+    <string name="hello_world">Hello world!</string>
+</resources>

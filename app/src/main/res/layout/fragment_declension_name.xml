@@ -1,0 +1,106 @@
+<android.support.constraint.ConstraintLayout android:id="@+id/frameLayout"
+                                             xmlns:android="http://schemas.android.com/apk/res/android"
+                                             xmlns:app="http://schemas.android.com/apk/res-auto"
+                                             xmlns:tools="http://schemas.android.com/tools"
+                                             android:layout_width="match_parent"
+                                             android:layout_height="match_parent"
+                                             tools:context="com.sstanislavsky.acts.DeclensionNameFragment">
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/text_input_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <EditText
+            android:id="@+id/editTextName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:ems="15"
+            android:inputType="textPersonName"
+            android:hint="@string/declension_name_edittext"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="192dp"/>
+
+    <TextView
+        android:id="@+id/textViewName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/declension_name_texview_name"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/text_input_layout"
+        app:layout_constraintTop_toBottomOf="@+id/text_input_layout"/>
+
+    <TextView
+        android:id="@+id/textViewSex"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/declension_name_textview_sex"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/guideline4"
+        app:layout_constraintTop_toBottomOf="@+id/text_input_layout"/>
+
+    <CheckBox
+        android:id="@+id/checkBoxFullName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/declension_name_checkbox_fullname"
+        app:layout_constraintStart_toStartOf="@+id/text_input_layout"
+        app:layout_constraintTop_toBottomOf="@+id/textViewName"/>
+
+    <CheckBox
+        android:id="@+id/checkBoxMale"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/declension_name_checkbox_male"
+        app:layout_constraintStart_toStartOf="@+id/guideline4"
+        app:layout_constraintTop_toBottomOf="@+id/textViewSex"/>
+
+    <CheckBox
+        android:id="@+id/checkBoxFemale"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="4dp"
+        android:text="@string/declension_name_checkbox_female"
+        app:layout_constraintStart_toStartOf="@+id/guideline4"
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxMale"/>
+
+    <Button
+        android:id="@+id/buttonDeclension"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="52dp"
+        android:ems="15"
+        android:text="@string/declension_name_button_decline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxFemale"/>
+
+</android.support.constraint.ConstraintLayout>
