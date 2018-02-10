@@ -18,8 +18,10 @@
         app:layout_constraintTop_toTopOf="parent">
         <EditText
             android:id="@+id/editTextName"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
             android:layout_gravity="center"
             android:ems="15"
             android:inputType="textPersonName"
@@ -31,30 +33,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="192dp"/>
+        app:layout_constraintGuide_percent="0.5"/>
 
     <TextView
         android:id="@+id/textViewName"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
         android:layout_marginTop="24dp"
         android:text="@string/declension_name_texview_name"
         android:textSize="16sp"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="@+id/text_input_layout"
         app:layout_constraintStart_toStartOf="@+id/text_input_layout"
-        app:layout_constraintTop_toBottomOf="@+id/text_input_layout"/>
-
-    <TextView
-        android:id="@+id/textViewSex"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="24dp"
-        android:text="@string/declension_name_textview_sex"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="@+id/guideline4"
         app:layout_constraintTop_toBottomOf="@+id/text_input_layout"/>
 
     <CheckBox
@@ -77,7 +69,7 @@
         android:layout_marginTop="20dp"
         android:text="@string/declension_name_checkbox_male"
         app:layout_constraintStart_toStartOf="@+id/guideline4"
-        app:layout_constraintTop_toBottomOf="@+id/textViewSex"/>
+        app:layout_constraintTop_toBottomOf="@+id/textViewName"/>
 
     <CheckBox
         android:id="@+id/checkBoxFemale"
@@ -99,8 +91,10 @@
         android:layout_marginTop="52dp"
         android:ems="15"
         android:text="@string/declension_name_button_decline"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/checkBoxFemale"/>
+        <!--android:onClick="onButtonDeclensionClick"-->
 
 </android.support.constraint.ConstraintLayout>

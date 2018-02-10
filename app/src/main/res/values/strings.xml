@@ -11,7 +11,7 @@
     <!-- TODO: DeclensionNameFragment strings -->
 
     <string name="declension_name_edittext">Enter full name</string>
-    <string name="declension_name_texview_name">You are entered name?</string>
+    <string name="declension_name_texview_name">If result of declension is not satisfy you, try to applying next parameters:</string>
     <string name="declension_name_textview_sex">Select a gender:</string>
     <string name="declension_name_checkbox_fullname">Full name</string>
     <string name="declension_name_checkbox_male">Male</string>
@@ -19,6 +19,25 @@
     <string name="declension_name_button_decline">Decline</string>
 
     <!-- TODO: AgeCarFragment strings-->
+
+    <string name="age_car_text_view_text">0.0</string>
+    <string name="age_car_button">How old car</string>
+    <string name="age_car_month">Month</string>
+    <string name="age_car_year">Year</string>
+    <string name="age_car_no_entered_text">Please, enter the month and year</string>
+    <string name="age_car_contains_dot">Please, enter integer values</string>
+    <string name="age_car_wrong_month">Please, enter month beetween 1 and 12</string>
+    <string name="age_car_wrong_year">Please, enter the real year</string>
+
+    <!-- TODO: MorpherResponse strings -->
+
+    <string name="vidminok_naz">Nazyvnyj:\u0020</string>
+    <string name="vidminok_rod">Rodovyj:\u0020</string>
+    <string name="vidminok_dav">Davalnyj:\u0020</string>
+    <string name="vidminok_zn">Znahidnyj:\u0020</string>
+    <string name="vidminok_or">Orudnyj:\u0020</string>
+    <string name="vidminok_mis">Mistseyj:\u0020</string>
+    <string name="vidminok_kl">Klychnyj:\u0020</string>
 
 
     <string name="hello_world">Hello world!</string>
