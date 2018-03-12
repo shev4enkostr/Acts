@@ -1,6 +1,7 @@
 package com.sstanislavsky.acts.retrofit;
 
 import android.support.annotation.NonNull;
+import android.support.v4.util.ArrayMap;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -108,5 +109,26 @@ public class MorpherResponse {
         arrayList.add(vidminok_mis + mis);
         arrayList.add(vidminok_kl + kl);
         return arrayList;
+    }
+
+    public ArrayMap<String, String> toArrayMap() {
+        ArrayMap<String, String> arrayMap = new ArrayMap<>();
+        arrayMap.put(vidminok_naz, naz);
+        arrayMap.put(vidminok_rod, rod);
+        arrayMap.put(vidminok_dav, dav);
+        arrayMap.put(vidminok_zn, zn);
+        arrayMap.put(vidminok_or, or);
+        arrayMap.put(vidminok_mis, mis);
+        arrayMap.put(vidminok_kl, kl);
+        return arrayMap;
+    }
+
+    public String[] toArrayWithoutCases() {
+        return new String[] {naz, rod, dav, zn, or, mis, kl};
+    }
+
+    public String[] toArrayWithCases() {
+        return new String[] {vidminok_naz + naz, vidminok_rod + rod, vidminok_dav + dav,
+                vidminok_zn + zn, vidminok_or + or, vidminok_mis + mis, vidminok_kl + kl};
     }
 }

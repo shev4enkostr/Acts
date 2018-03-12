@@ -1,5 +1,5 @@
 <resources>
-    <!-- TODO: MainActivity strings -->
+    <!-- MainActivity strings -->
 
     <string name="app_name">Acts</string>
     <string name="tab_text_1">Declension of names</string>
@@ -8,7 +8,7 @@
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
 
-    <!-- TODO: DeclensionNameFragment strings -->
+    <!-- DeclensionNameFragment strings -->
 
     <string name="declension_name_edittext">Enter full name</string>
     <string name="declension_name_texview_name">If result of declension is not satisfy you, try to applying next parameters:</string>
@@ -17,19 +17,29 @@
     <string name="declension_name_checkbox_male">Male</string>
     <string name="declension_name_checkbox_female">Female</string>
     <string name="declension_name_button_decline">Decline</string>
+    
+    <string name="declension_dialog_title">Declension result</string>
+    <string name="no_internet_dialog_title">No internet connection</string>
+    <string name="no_internet_dialog_message">No internet connection, please check settings in your device! Do You want open setting for enable internet connection?</string>
+    <string name="dialog_positive_button">OK</string>
+    <string name="dialog_negative_button">Cancel</string>
+    
+    <string name="toast_declension_name_no_entered_name">You are not enter name!</string>
+    <string name="toast_declension_name_copied_to_clipboard">Copied to clipboard:\u0020</string>
+    <string name="toast_declension_name_error_copy">Error copy to clipboard</string>
 
-    <!-- TODO: AgeCarFragment strings-->
+    <!-- AgeCarFragment strings-->
 
     <string name="age_car_text_view_text">0.0</string>
     <string name="age_car_button">How old car</string>
     <string name="age_car_month">Month</string>
     <string name="age_car_year">Year</string>
-    <string name="age_car_no_entered_text">Please, enter the month and year</string>
-    <string name="age_car_contains_dot">Please, enter integer values</string>
-    <string name="age_car_wrong_month">Please, enter month beetween 1 and 12</string>
-    <string name="age_car_wrong_year">Please, enter the real year</string>
+    <string name="toast_age_car_no_entered_text">Please, enter the month and year</string>
+    <string name="toast_age_car_contains_dot">Please, enter integer values</string>
+    <string name="toast_age_car_wrong_month">Please, enter month between 1 and 12</string>
+    <string name="toast_age_car_wrong_year">Please, enter the real year</string>
 
-    <!-- TODO: MorpherResponse strings -->
+    <!-- MorpherResponse strings -->
 
     <string name="vidminok_naz">Nazyvnyj:\u0020</string>
     <string name="vidminok_rod">Rodovyj:\u0020</string>

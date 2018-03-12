@@ -1,6 +1,9 @@
 package com.sstanislavsky.acts;
 
 import android.app.AlertDialog;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,19 +16,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.sstanislavsky.acts.retrofit.CustomApplication;
 import com.sstanislavsky.acts.retrofit.MorpherResponse;
 import com.sstanislavsky.acts.utility.InternetChecker;
+import com.sstanislavsky.acts.utility.ToUpperCaseFirstLetterTextWatcher;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class DeclensionNameFragment extends Fragment {
+public class DeclensionNameFragment extends Fragment implements View.OnClickListener{
 
     private EditText editTextName;
     private Button buttonDeclension;
@@ -46,15 +49,22 @@ public class DeclensionNameFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_declension_name, container, false);
-        findViews(view);
-        initialiseCheckBoxes();
+        initialiseUI(view);
+        //findViews(view);
+        //setupCheckBoxes();
         return view;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        decline();
+
+        new InternetChecker(new InternetChecker.IsConnectedListener() {
+            @Override
+            public void isConnected(Boolean internet) {
+                if (!internet) showNotInternetConnectionDialog();
+            }
+        });
     }
 
     @Override
@@ -65,56 +75,54 @@ public class DeclensionNameFragment extends Fragment {
         Log.d("MyLog", "DeclensionNameFragment.onResume()");
     }
 
-    private void findViews(View view) {
+    @Override
+    public void onClick(View view) {
+        decline();
+    }
+
+    private void initialiseUI(View view) {
         editTextName = view.findViewById(R.id.editTextName);
         buttonDeclension = view.findViewById(R.id.buttonDeclension);
         checkBoxName = view.findViewById(R.id.checkBoxFullName);
         checkBoxMale = view.findViewById(R.id.checkBoxMale);
         checkBoxFemale = view.findViewById(R.id.checkBoxFemale);
-    }
 
-    private void initialiseCheckBoxes() {
-        checkBoxMale.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (compoundButton.isChecked())
-                    checkBoxFemale.setChecked(false);
-            }
-        });
-        checkBoxFemale.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (compoundButton.isChecked())
-                    checkBoxMale.setChecked(false);
-            }
-        });
+        buttonDeclension.setOnClickListener(this);
+
+        ToUpperCaseFirstLetterTextWatcher textWatcher = new ToUpperCaseFirstLetterTextWatcher(editTextName);
+        editTextName.addTextChangedListener(textWatcher);
     }
 
     private void decline() {
-        buttonDeclension.setOnClickListener(new View.OnClickListener() {
+        new InternetChecker(new InternetChecker.IsConnectedListener() {
             @Override
-            public void onClick(View view) {
-                if (!MainActivity.checkInternetConnection())
-                    showNotInternetConnectionDialog();
-                else if (editTextName.getText().toString().isEmpty()) {
-                    Toast.makeText(getContext(), "Enter name!", Toast.LENGTH_SHORT).show();
-                }
-                else makeRequest();
+            public void isConnected(Boolean internet) {
+                if (internet) {
+                    if (editTextName.getText().toString().isEmpty())
+                        showToast(R.string.toast_declension_name_no_entered_name);
+                    else makeRequest();
+                } else showNotInternetConnectionDialog();
             }
         });
+        /*if (!MainActivity.checkInternetConnection())
+            showNotInternetConnectionDialog();
+        else if (editTextName.getText().toString().isEmpty()) {
+            showToast(R.string.toast_declension_name_no_entered_name);
+        }
+        else makeRequest();*/
     }
 
     private void showNotInternetConnectionDialog() {
         new AlertDialog.Builder(getContext())
-                .setTitle("Title")
-                .setMessage("Not internet connection, please check settings in your device!")
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                .setTitle(R.string.no_internet_dialog_title)
+                .setMessage(R.string.no_internet_dialog_message)
+                .setPositiveButton(R.string.dialog_positive_button, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         startActivity(new Intent(Settings.ACTION_SETTINGS));
                     }
                 })
-                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.dialog_negative_button, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.dismiss();
@@ -143,8 +151,6 @@ public class DeclensionNameFragment extends Fragment {
                     public void onResponse(Call<MorpherResponse> call, Response<MorpherResponse> response) {
                         response.body().setNaz(name);
                         showDeclensionDialog(response.body());
-
-                        //Toast.makeText(getContext(), response.body().toString(), Toast.LENGTH_LONG).show();
                     }
 
                     @Override
@@ -156,19 +162,32 @@ public class DeclensionNameFragment extends Fragment {
 
     private void showDeclensionDialog(final MorpherResponse response) {
         new AlertDialog.Builder(getContext())
-                .setTitle("Title")
-                .setItems(response.toArrayList().toArray(new String[response.toArrayList().size()]), new DialogInterface.OnClickListener() {
+                .setTitle(R.string.declension_dialog_title)
+                .setItems(response.toArrayWithCases(), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        Toast.makeText(getContext(), response.toArrayList().get(i), Toast.LENGTH_SHORT).show();
+                        String copiedText = (response.toArrayWithoutCases())[i];
+                        ClipboardManager clipboardManager = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
+                        ClipData clipData = ClipData.newPlainText("text", copiedText);
+                        try {
+                            clipboardManager.setPrimaryClip(clipData);
+                            Toast.makeText(getContext(), getString(R.string.toast_declension_name_copied_to_clipboard) +
+                                    (response.toArrayWithoutCases())[i], Toast.LENGTH_SHORT).show();
+                        } catch (NullPointerException e) {
+                            showToast(R.string.toast_declension_name_error_copy);
+                        }
                     }
                 })
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.dialog_positive_button, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.dismiss();
                     }
                 })
                 .create().show();
+    }
+
+    private void showToast(int resId) {
+        Toast.makeText(getContext(), resId, Toast.LENGTH_SHORT).show();
     }
 }

@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        checkInternetConnection();
+        //checkInternetConnection();
         Log.d("MyLog", "MainActivity.onResume()");
     }
 

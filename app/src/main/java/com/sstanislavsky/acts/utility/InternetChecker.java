@@ -15,7 +15,7 @@ public class InternetChecker extends AsyncTask<Void, Void, Boolean> {
     private IsConnectedListener isConnectedListener;
 
     public interface IsConnectedListener {
-        void isConnected(Boolean connection);
+        void isConnected(Boolean internet);
     }
 
     public InternetChecker(IsConnectedListener isConnectedListener) {
@@ -34,7 +34,7 @@ public class InternetChecker extends AsyncTask<Void, Void, Boolean> {
     }
 
     @Override
-    protected void onPostExecute(Boolean connection) {
-        isConnectedListener.isConnected(connection);
+    protected void onPostExecute(Boolean internet) {
+        isConnectedListener.isConnected(internet);
     }
 }

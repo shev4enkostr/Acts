@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * Created by stanislav on 2/6/18.
@@ -36,7 +37,6 @@ public class AgeCarFragment extends Fragment implements View.OnFocusChangeListen
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_age_car, container, false);
         findViews(view);
-
         return view;
     }
 
@@ -66,11 +66,11 @@ public class AgeCarFragment extends Fragment implements View.OnFocusChangeListen
         int nowYear = now.getYear() + 1900;
 
         if (enteredMonth.isEmpty() || enteredYear.isEmpty()) {
-            showToast(R.string.age_car_no_entered_text);
+            showToast(R.string.toast_age_car_no_entered_text);
             return; // return from method
         }
         if (enteredMonth.contains(".") || enteredYear.contains(".")) {
-            showToast(R.string.age_car_contains_dot);
+            showToast(R.string.toast_age_car_contains_dot);
             return; // return from method
         }
 
@@ -84,29 +84,17 @@ public class AgeCarFragment extends Fragment implements View.OnFocusChangeListen
             carYear += 1900;
 
         if (carMonth <= 0 || carMonth > 12)
-            showToast(R.string.age_car_wrong_month);
+            showToast(R.string.toast_age_car_wrong_month);
         else if (carYear > 3000)
-            showToast(R.string.age_car_wrong_year);
+            showToast(R.string.toast_age_car_wrong_year);
         else {
             BigDecimal resultYear = BigDecimal.valueOf(nowYear - carYear);
             BigDecimal resultMonth = BigDecimal.valueOf(Math.round((nowMonth - carMonth) / 1.2));
             resultMonth = resultMonth.multiply(BigDecimal.valueOf(0.1));
 
             textView.setText((resultYear.add(resultMonth)).toString());
+            //textView.setText(String.format(Locale.ENGLISH, (resultYear.add(resultMonth)).toString());
         }
-//		else if (carMonth > nowMonth && carYear > nowYear)
-//			result = (nowYear - carYear) + "." + Math.abs(Math.round((nowMonth - carMonth) / 1.2));
-//		else if (carMonth > nowMonth && carYear <= nowYear)
-//			result = "-" + (nowYear - carYear) + "." + Math.abs(Math.round((nowMonth - carMonth) / 1.2));
-//		else if (carMonth < nowMonth && carYear > nowYear) {
-//			if (carYear == nowYear + 1)
-//				result = "-";
-//			result += (nowYear - carYear + 1) + "." + (10 - (Math.round((nowMonth - carMonth) / 1.2)));
-//		} else
-//			result = (nowYear - carYear) + "." + Math.round((nowMonth - carMonth) / 1.2);
-//
-//		if (result.contains("."))
-//			textView.setText(result);
     }
 
     private void showToast(int resId) {
