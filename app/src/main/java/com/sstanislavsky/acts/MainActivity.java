@@ -1,5 +1,8 @@
 package com.sstanislavsky.acts;
 
+import android.content.Intent;
+import android.preference.PreferenceFragment;
+import android.preference.PreferenceManager;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -30,13 +33,14 @@ public class MainActivity extends AppCompatActivity {
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager viewPager;
-    protected static boolean internet = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        initialiseUI();
+        //initialise preferences with default values
+        PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
+        initializeUI();
     }
 
     @Override
@@ -50,6 +54,10 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+
+        boolean isHistory = PreferenceManager.getDefaultSharedPreferences(this)
+                .getBoolean("pref_enable_history", false);
+        menu.findItem(R.id.action_history).setEnabled(isHistory);
         return true;
     }
 
@@ -62,13 +70,14 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            startActivity(new Intent(this, AppPreferenceActivity.class));
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    private void initialiseUI() {
+    private void initializeUI() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         // Create the adapter that will return a fragment for each of the two
@@ -76,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
         sectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
-        viewPager = (ViewPager) findViewById(R.id.container);
+        viewPager = (ViewPager) findViewById(R.id.fragment_container);
         viewPager.setAdapter(sectionsPagerAdapter);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
@@ -92,17 +101,6 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });*/
-    }
-
-    public static boolean checkInternetConnection() {
-        new InternetChecker(new InternetChecker.IsConnectedListener() {
-            @Override
-            public void isConnected(Boolean connection) {
-                internet = connection;
-                //Toast.makeText(MainActivity.this, connection.toString(), Toast.LENGTH_SHORT).show();
-            }
-        });
-        return internet;
     }
 
     /**

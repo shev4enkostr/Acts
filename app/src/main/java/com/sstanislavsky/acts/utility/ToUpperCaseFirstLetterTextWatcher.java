@@ -12,6 +12,7 @@ import android.widget.EditText;
 public class ToUpperCaseFirstLetterTextWatcher implements TextWatcher {
 
     private EditText editText;
+    String enteredText = "";
 
     public ToUpperCaseFirstLetterTextWatcher(EditText editText) {
         super();
@@ -19,7 +20,9 @@ public class ToUpperCaseFirstLetterTextWatcher implements TextWatcher {
     }
 
     @Override
-    public void beforeTextChanged(CharSequence charSequence, int start, int before, int count) {}
+    public void beforeTextChanged(CharSequence charSequence, int start, int before, int count) {
+        enteredText = charSequence.toString();
+    }
 
     @Override
     public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
@@ -28,7 +31,7 @@ public class ToUpperCaseFirstLetterTextWatcher implements TextWatcher {
         //Log.d("TextWatcher_indexOf()", String.valueOf(charSequence.toString().indexOf(" ")));
         Log.d("TextWatcher_getSpace", String.valueOf(getNumberOfFirstCharacterInLastWord(charSequence.toString())));
 
-        String enteredText = charSequence.toString();
+        //String enteredText = charSequence.toString();
         int firstCharAtLastWord = getNumberOfFirstCharacterInLastWord(charSequence.toString());
 
         if (count >= 1 && (count - before) > 0 &&

@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -49,7 +50,7 @@ public class DeclensionNameFragment extends Fragment implements View.OnClickList
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_declension_name, container, false);
-        initialiseUI(view);
+        initializeUI(view);
         //findViews(view);
         //setupCheckBoxes();
         return view;
@@ -80,12 +81,27 @@ public class DeclensionNameFragment extends Fragment implements View.OnClickList
         decline();
     }
 
-    private void initialiseUI(View view) {
+    private void initializeUI(View view) {
         editTextName = view.findViewById(R.id.editTextName);
         buttonDeclension = view.findViewById(R.id.buttonDeclension);
         checkBoxName = view.findViewById(R.id.checkBoxFullName);
         checkBoxMale = view.findViewById(R.id.checkBoxMale);
         checkBoxFemale = view.findViewById(R.id.checkBoxFemale);
+
+        checkBoxMale.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (compoundButton.isChecked())
+                    checkBoxFemale.setChecked(false);
+            }
+        });
+        checkBoxFemale.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (compoundButton.isChecked())
+                    checkBoxMale.setChecked(false);
+            }
+        });
 
         buttonDeclension.setOnClickListener(this);
 
