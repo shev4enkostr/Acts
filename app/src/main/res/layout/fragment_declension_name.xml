@@ -24,7 +24,7 @@
             android:layout_marginRight="16dp"
             android:layout_gravity="center"
             android:ems="15"
-            android:inputType="textPersonName"
+            android:inputType="textPersonName|textCapWords"
             android:hint="@string/declension_name_edittext"/>
     </android.support.design.widget.TextInputLayout>
 

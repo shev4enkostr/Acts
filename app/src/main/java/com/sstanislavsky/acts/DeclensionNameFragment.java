@@ -105,8 +105,8 @@ public class DeclensionNameFragment extends Fragment implements View.OnClickList
 
         buttonDeclension.setOnClickListener(this);
 
-        ToUpperCaseFirstLetterTextWatcher textWatcher = new ToUpperCaseFirstLetterTextWatcher(editTextName);
-        editTextName.addTextChangedListener(textWatcher);
+//        ToUpperCaseFirstLetterTextWatcher textWatcher = new ToUpperCaseFirstLetterTextWatcher(editTextName);
+//        editTextName.addTextChangedListener(textWatcher);
     }
 
     private void decline() {
